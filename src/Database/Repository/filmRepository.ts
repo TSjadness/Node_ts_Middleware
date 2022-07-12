@@ -1,4 +1,4 @@
-import AppError from "../../utils/AppError";
+import AppError from "../../Utils/AppError";
 import Film, { FilmInput, FilmOutput } from "../Models/filmModels";
 
 export const getAll = async (): Promise<FilmOutput[]> => {
@@ -7,9 +7,9 @@ export const getAll = async (): Promise<FilmOutput[]> => {
 
 export const getById = async (id: number): Promise<FilmOutput> => {
    const film = await Film.findByPk(id);
-   
+
    if (!film) {
-      throw new AppError("NotFoundError " ,"Registro nao encontrado!", 404);
+      throw new AppError("NotFoundError ", "Registro nao encontrado!", 404);
    }
    return film;
 };
@@ -21,7 +21,7 @@ export const create = async (payload: FilmInput): Promise<FilmOutput> => {
 export const updateById = async (id: number, payload: FilmInput): Promise<FilmOutput> => {
    const film = await Film.findByPk(id);
    if (!film) {
-      throw new Error("Registro nao encontrado!");
+      throw new AppError("NotFoundError ", "Registro nao encontrado!", 404);
    }
    return await film.update(payload);
 
